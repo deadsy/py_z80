@@ -40,9 +40,10 @@ work the rest out yourself :-)
 ## Dependencies
 Tested with:
 
-Linux
-Python 2.4.4
-Pygame 1.7.1
+* Linux
+* Python 2.4.4
+* Pygame 1.7.1
+
 The CLI is likely to have some Linux/Windows issues - I haven't tested running under Windows.
 
 ## Future Plans
@@ -50,15 +51,17 @@ Very few :-)
 
 I had a few primary goals:
 
-fight off occasional bouts of nostalgia I have about 8 bit machines in a semi-educational way (done).
-satisfy my curiosity about the Jupiter ACE, a machine I did not own back in the day (done).
-see how fast you can emulate a Z80 with a language that is sub-optimal for emulation (answer: not very).
+* fight off occasional bouts of nostalgia I have about 8 bit machines in a semi-educational way (done).
+* satisfy my curiosity about the Jupiter ACE, a machine I did not own back in the day (done).
+* see how fast you can emulate a Z80 with a language that is sub-optimal for emulation (answer: not very).
+
 The future TODO list is as long as you want to make it:
 
-Complete emulation of all Z80 instructions
-Support sound emulation
-Support mouse clicking on the keyboard graphic
-Support tape operations
+* Complete emulation of all Z80 instructions
+* Support sound emulation
+* Support mouse clicking on the keyboard graphic
+* Support tape operations
+
 etc. etc.
 Others more obsessive than myself are welcome to contribute.
 
