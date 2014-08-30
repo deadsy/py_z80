@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------------
 """
-PyZX80: ZX80 platform Emulator
+PyZ80: Z80 platform Emulator
 """
 #-----------------------------------------------------------------------------
 
@@ -13,7 +13,7 @@ import tec1
 
 #-----------------------------------------------------------------------------
 
-_version_str = 'PyZX80: Python ZX80 Platform Emulator 0.1'
+_version_str = 'PyZ80: Python Z80 Platform Emulator 0.1'
 
 #-----------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ class application:
 
     def main_menu(self):
         self.cli.set_root(self.menu_root)
-        self.cli.set_prompt('\npyzx80> ')
+        self.cli.set_prompt('\npyz80> ')
 
     def put(self, data):
         """console ouput for leaf functions"""
