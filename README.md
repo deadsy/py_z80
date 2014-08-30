@@ -17,7 +17,7 @@ The Z80 instruction set is mostly complete. Some instructions remain unimplement
 
 The Jupiter ACE emulation is quite functional, but more work needs to be done (tape support and sound support are missing).
 
-The TEC 1 emulation is slightly functional. I don't have permission to include the rom for this, so I have not included the rom file.
+The TEC 1 emulation is only slightly functional.
 
 ## Usage
 jasonh@satan ~/work/code/pyzx80 $ make
