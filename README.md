@@ -1,6 +1,6 @@
-# PyZX80
+# Py_Z80
 
-PyZX80 is a Z80 CPU emulation written in Python.
+Py_Z80 is a Z80 CPU emulation written in Python.
 
 Also included is a machine language monitor allowing the user to dump memory, disassemble memory, dump registers and single step machine code.
 
@@ -20,7 +20,7 @@ The Jupiter ACE emulation is quite functional, but more work needs to be done (t
 The TEC 1 emulation is only slightly functional.
 
 ## Usage
-jasonh@satan ~/work/code/pyzx80 $ make
+jasonh@satan ~/work/code/py_z80 $ make
 python ./z80gen.py -o z80bh.py
 cat z80th.py > z80.py
 cat z80bh.py >> z80.py
