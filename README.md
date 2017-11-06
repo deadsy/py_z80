@@ -20,21 +20,21 @@ The Jupiter ACE emulation is quite functional, but more work needs to be done (t
 The TEC 1 emulation is only slightly functional.
 
 ## Usage
-jasonh@satan ~/work/code/py_z80 $ make
-python ./z80gen.py -o z80bh.py
-cat z80th.py > z80.py
-cat z80bh.py >> z80.py
-jasonh@satan ~/work/code/pyzx80 $ python ./main.py
+    $ make
+    $ python ./z80gen.py -o z80bh.py
+    $ cat z80th.py z80bh.py > z80.py
+    $ python ./main.py
+    
+    PyZX80: Python Z80 Platform Emulator 0.1
+    
+    pyzx80> target jace
 
-PyZX80: Python Z80 Platform Emulator 0.1
+    emulating "Jupiter ACE"
+    
+    jace> run
 
-pyzx80> target jace
+    press any key to halt
 
-emulating "Jupiter ACE"
-
-jace> run
-
-press any key to halt
 work the rest out yourself :-)
 
 ## Dependencies
