@@ -1,4 +1,4 @@
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 """
 Command Line Interface
 
@@ -16,11 +16,12 @@ Menu Format: (name, descr, help, leaf, submenu)
 Function Help Format: (parm, descr)
 
 """
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 import conio
 
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+
 
 class command:
 
@@ -50,7 +51,7 @@ class command:
 
     def get(self):
         """return the current command string"""
-        return ''.join(self.cmd)
+        return "".join(self.cmd)
 
     def erase(self):
         """erase a character from the tail of the command string"""
@@ -104,20 +105,22 @@ class command:
         # erase the old command
         n1 = self.old_cursor
         n2 = len(self.old_cmd)
-        erase = ''.join(['\b' * n1, ' ' * n2, '\b' * n2])
+        erase = "".join(["\b" * n1, " " * n2, "\b" * n2])
         self.app.io.put(erase)
 
         # write the new command
         self.app.io.put(self.get())
 
         # position the cursor
-        bs = '\b' * (len(self.cmd) - self.cursor)
+        bs = "\b" * (len(self.cmd) - self.cursor)
         self.app.io.put(bs)
 
         self.old_cmd = list(self.cmd)
         self.old_cursor = self.cursor
 
-#-----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+
 
 class cli:
 
@@ -127,7 +130,7 @@ class cli:
         self.hidx = 0
         self.cl = command(app)
         self.running = True
-        self.prompt = '\n> '
+        self.prompt = "\n> "
         self.poll = None
 
     def set_root(self, root):
@@ -144,12 +147,12 @@ class cli:
 
     def func_help(self, help):
         """print help for a leaf function"""
-        self.app.io.put('\n\n')
-        for (parm, descr) in help:
-            if parm != '':
-                self.app.io.put('    %-19s: %s\n' % (parm, descr))
+        self.app.io.put("\n\n")
+        for parm, descr in help:
+            if parm != "":
+                self.app.io.put("    %-19s: %s\n" % (parm, descr))
             else:
-                self.app.io.put('    %-19s  %s\n' % ('', descr))
+                self.app.io.put("    %-19s  %s\n" % ("", descr))
 
     def reset_history(self):
         self.hidx = len(self.history)
@@ -184,7 +187,7 @@ class cli:
         elif self.hidx == n - 1:
             # end of history recent - go back to an empty command
             self.hidx = n
-            return ''
+            return ""
         else:
             # go forwards
             self.hidx += 1
@@ -196,10 +199,10 @@ class cli:
         for i in range(len(cmds)):
             l = len(cmds[i])
             if i == idx:
-                marker.append('^' * l)
+                marker.append("^" * l)
             else:
-                marker.append(' ' * l)
-        return '\n'.join([msg, ' '.join(cmds), ' '.join(marker)])
+                marker.append(" " * l)
+        return "\n".join([msg, " ".join(cmds), " ".join(marker)])
 
     def get_cmd(self):
         """
@@ -254,7 +257,7 @@ class cli:
         return False if we should reuse the existing one
         """
         # scan the command line into a list of tokens
-        cmd_list = [cmd for cmd in self.cl.get().split(' ') if cmd != '']
+        cmd_list = [cmd for cmd in self.cl.get().split(" ") if cmd != ""]
 
         # if there are no commands, print a new empty prompt
         if len(cmd_list) == 0:
@@ -267,21 +270,21 @@ class cli:
             cmd = cmd_list[idx]
 
             # A trailing '?' means the user wants help for this command
-            if cmd[-1] == '?':
+            if cmd[-1] == "?":
                 # strip off the '?'
                 cmd = cmd[:-1]
                 # print the matching items and help strings for this menu
-                self.app.io.put('\n\n')
-                for (name, descr, help, leaf, submenu) in menu:
+                self.app.io.put("\n\n")
+                for name, descr, help, leaf, submenu in menu:
                     if name.startswith(cmd):
-                        self.app.io.put('    %-19s: %s\n' % (name, descr))
+                        self.app.io.put("    %-19s: %s\n" % (name, descr))
                 # strip off the '?' and recycle the command
                 self.cl.erase()
                 self.cl.repeat()
                 return True
 
             # A trailing tab means the user wants command completion
-            if cmd[-1] == '\t':
+            if cmd[-1] == "\t":
                 # get rid of the tab
                 cmd = cmd[:-1]
                 self.cl.erase()
@@ -295,15 +298,15 @@ class cli:
                     return False
                 elif len(matches) == 1:
                     # one completion: add it to the command
-                    self.cl.add(matches[0][0][len(cmd):] + ' ')
+                    self.cl.add(matches[0][0][len(cmd) :] + " ")
                     self.cl.end()
                     return False
                 else:
                     # multiple completions: display them
-                    self.app.io.put('\n\n')
-                    for (name, descr, help, leaf, submenu) in matches:
-                        self.app.io.put('%s ' % name)
-                    self.app.io.put('\n')
+                    self.app.io.put("\n\n")
+                    for name, descr, help, leaf, submenu in matches:
+                        self.app.io.put("%s " % name)
+                    self.app.io.put("\n")
                     # recycle the command
                     self.cl.repeat()
                     return True
@@ -314,12 +317,12 @@ class cli:
                 if item[0] == cmd:
                     # accept an exact match
                     matches = [item]
-                    break;
+                    break
                 if item[0].startswith(cmd):
                     matches.append(item)
             if len(matches) == 0:
                 # no matches - unknown command
-                self.app.io.put('\n\n%s\n' % self.error_str('unknown command', cmd_list, idx))
+                self.app.io.put("\n\n%s\n" % self.error_str("unknown command", cmd_list, idx))
                 self.cl.repeat()
                 return True
             if len(matches) == 1:
@@ -334,14 +337,14 @@ class cli:
                     args = cmd_list[idx:]
                     del args[0]
                     if len(args) != 0:
-                        if args[-1][-1] == '?':
+                        if args[-1][-1] == "?":
                             # display help for the leaf function
                             self.func_help(help)
                             # strip off the '?', repeat the command
                             self.cl.erase()
                             self.cl.repeat()
                             return True
-                        elif args[-1][-1] == '\t':
+                        elif args[-1][-1] == "\t":
                             # tab happy user: strip off the tab
                             self.cl.erase()
                             self.cl.end()
@@ -353,12 +356,12 @@ class cli:
                     return True
             else:
                 # multiple matches - ambiguous command
-                self.app.io.put('\n\n%s\n' % self.error_str('ambiguous command', cmd_list, idx))
+                self.app.io.put("\n\n%s\n" % self.error_str("ambiguous command", cmd_list, idx))
                 self.cl.clear()
                 return True
 
         # reached the end of the command list with no errors and no leaf function.
-        self.app.io.put('\n\nadditional input needed\n')
+        self.app.io.put("\n\nadditional input needed\n")
         self.cl.repeat()
         return True
 
@@ -371,21 +374,22 @@ class cli:
                     if self.running == True:
                         # create a new prompt line
                         self.reset_history()
-                        self.app.io.put('%s' % self.prompt)
+                        self.app.io.put("%s" % self.prompt)
                     else:
                         # clean exit
-                        self.app.io.put('\n\n')
+                        self.app.io.put("\n\n")
                         continue
             # run the external polling routine
             if self.poll != None:
                 if self.poll() == True:
                     # create a new prompt line
                     self.reset_history()
-                    self.app.io.put('%s' % self.prompt)
+                    self.app.io.put("%s" % self.prompt)
             self.cl.render()
 
     def exit(self):
         """exit the cli"""
         self.running = False
 
-#-----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------

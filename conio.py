@@ -1,40 +1,41 @@
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 """
 Console IO
 
 Provides non-blocking, non-echoing access to the console interface.
 """
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 import os
 import select
 import termios
 import sys
 
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # when otherwise idle, allow other things to run
 
-_poll_timeout = 0.1 # secs
+_poll_timeout = 0.1  # secs
 
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-CHAR_NULL  = 0x00
-CHAR_BELL  = 0x07
-CHAR_TAB   = 0x09
-CHAR_CR    = 0x0a
-CHAR_DOWN  = 0x10
-CHAR_UP    = 0x11
-CHAR_LEFT  = 0x12
+CHAR_NULL = 0x00
+CHAR_BELL = 0x07
+CHAR_TAB = 0x09
+CHAR_CR = 0x0A
+CHAR_DOWN = 0x10
+CHAR_UP = 0x11
+CHAR_LEFT = 0x12
 CHAR_RIGHT = 0x13
-CHAR_END   = 0x14
-CHAR_HOME  = 0x15
-CHAR_ESC   = 0x1b
+CHAR_END = 0x14
+CHAR_HOME = 0x15
+CHAR_ESC = 0x1B
 CHAR_SPACE = 0x20
-CHAR_QM    = 0x3f
-CHAR_BS    = 0x7f
-CHAR_DEL   = 0x7e
+CHAR_QM = 0x3F
+CHAR_BS = 0x7F
+CHAR_DEL = 0x7E
 
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+
 
 class console:
 
@@ -74,22 +75,23 @@ class console:
         if n == 1:
             return ord(x)
         elif n == 3:
-            if x == '\x1b[A':
+            if x == "\x1b[A":
                 return CHAR_UP
-            elif x == '\x1b[B':
+            elif x == "\x1b[B":
                 return CHAR_DOWN
-            elif x == '\x1b[C':
+            elif x == "\x1b[C":
                 return CHAR_RIGHT
-            elif x == '\x1b[D':
+            elif x == "\x1b[D":
                 return CHAR_LEFT
-            elif x == '\x1b[F':
+            elif x == "\x1b[F":
                 return CHAR_END
-            elif x == '\x1b[H':
+            elif x == "\x1b[H":
                 return CHAR_HOME
         return CHAR_NULL
 
     def put(self, data):
         """output a string to console"""
-        os.write(self.fd, data)
+        os.write(self.fd, data.encode())
 
-#-----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
